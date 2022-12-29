@@ -26,22 +26,10 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form action="{{route('data.update',$data->id )}}"  method='POST'>
-                @csrf
-                @method('PUT')
-                    <div class="mb-3">
-                        <label for="nama" class="form-label">Name</label>
-                        <input type="text" class="form-control" value="{{$data->nama}}" name="nama" id="nama">
-                    </div>
-                    <div class="mb-3">
-                        <label for="nilai" class="form-label">Score</label>
-                        <input type="number" class="form-control" value="{{$data->nilai}}" name="nilai" id="nilai">
-                    </div>
-
-                    <a href="{{route('data.index')}}" class="btn btn-primary">Back</a>
-
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
+                <h3>id : {{$data->id }}</h3>
+                <h3>nama : {{$data->nama }}</h3>
+                <h3>nilai : {{$data->nilai }}</h3>
+                
             </div>
         </div>
     </div>

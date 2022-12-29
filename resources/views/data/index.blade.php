@@ -51,8 +51,17 @@
                             <td>{{$item->nama}}</td>
                             <td>{{$item->nilai}}</td>
                             <td>
-                                <a href="{{route('data.edit')}}" class="btn btn-success btn-sm">Edit</a>
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                
+                                <a href="{{route('data.show', $item->id)}}" class="btn btn-primary btn-sm">show</a>
+                                <a href="{{route('data.edit', $item->id)}}" class="btn btn-success btn-sm">Edit</a>
+                            </td>
+                            <td>
+                                <form name="delete" action="{{route('data.destroy', $item->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" name='delete'>Delete</button>
+                                </form>
+                        
                             </td>
 
                         </tr>

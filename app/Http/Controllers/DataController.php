@@ -58,9 +58,15 @@ class DataController extends Controller
      * @param  \App\Models\Data  $data
      * @return \Illuminate\Http\Response
      */
-    public function show(Data $data)
+    public function show($data)
     {
         //
+        $data = Data::find($data);
+        if(!$data){
+            abort(404);
+        }
+        return view('data.detail')
+        ->with("data", $data);
     }
 
     /**
@@ -69,11 +75,14 @@ class DataController extends Controller
      * @param  \App\Models\Data  $data
      * @return \Illuminate\Http\Response
      */
-    public function edit(Data $data)
+    public function edit($data)
     {
-        return view('data.edit')->with([
-            'data'=>data::find[id],
-        ]);
+        $data = Data::find($data);
+        if(!$data){
+            abort(404);
+        }
+        return view('data.edit')
+        ->with("data", $data);
     }
 
     /**
@@ -83,9 +92,21 @@ class DataController extends Controller
      * @param  \App\Models\Data  $data
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Data $data)
+    public function update(Request $request, $data)
     {
         //
+        $request->validate([
+            'nama'=>'required|min:8|max:255',
+            'nilai'=>'required',
+        ]);
+        $data = Data::find($data);
+        if(!$data){
+            abort(404);
+        }
+        $data->nama=$request->nama;
+        $data->nilai=$request->nilai;
+        $data->save();
+        return to_route('data.index')->with('Success Adding Data!');
     }
 
     /**
@@ -94,8 +115,12 @@ class DataController extends Controller
      * @param  \App\Models\Data  $data
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Data $data)
+    public function destroy($data)
     {
         //
+        $data = Data::find($data);       
+        $data-> delete();                 
+
+        return to_route('data.index')->with('success', 'data deleted');
     }
 }

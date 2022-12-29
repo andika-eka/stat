@@ -9,4 +9,11 @@ class Data extends Model
 {
     use HasFactory;
     public $incrementing=false;
+    protected $primaryKey = 'id';
+    protected $table = 'data';
+    protected $fillable  = [
+        "id",
+        "nama",
+        "nilai",
+    ];
 }

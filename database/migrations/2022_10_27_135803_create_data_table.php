@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('data', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id')->unsigned(); 
             $table->string('nama')->nullable();
             $table->integer('nilai')->nullable();
             $table->timestamps();
